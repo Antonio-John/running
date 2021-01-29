@@ -1,4 +1,4 @@
-from tools import read_file, get_dates_df, merge
+from read_in_and_merge_tools import read_file, get_dates_df, merge
 from configparser import ConfigParser
 from datetime import datetime
 
@@ -11,7 +11,6 @@ def read_merge_with_dates(config, now_date):
     raw_df = read_file(config)
     date_df = get_dates_df(now_date)
 
-    print(raw_df.columns)
     merged_df = merge(raw_df, date_df)
 
     merged_df.to_csv(config.get("merged","running_merged"))
