@@ -21,13 +21,13 @@ def get_dates_df(end_date):
     """
     df_dates = pd.DataFrame(pd.date_range(start='10/12/2019',
                                        end=end_date),
-                                       columns = ["Date"])
+                                       columns = ["date"])
 
     return df_dates
 
 
 def merge(raw_df, df_date):
 
-    merge = df_date.merge(raw_df, how="left", on="Date")
+    merge = df_date.merge(raw_df, how="left", on="date")
 
     return merge

@@ -18,6 +18,7 @@ def read_merge_with_dates(config, now_date):
 
     return merged_df
 
+# TODO schedule this
 
 if __name__ == "__main__":
     config = ConfigParser()
