@@ -1,2 +1,0 @@
-C:\Running\venv\Scripts\python.exe" "C:\Running\jobs\read_and_intial_merge.py"
-pau

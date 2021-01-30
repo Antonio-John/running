@@ -2,6 +2,7 @@ from read_in_and_merge_tools import read_file, get_dates_df, merge
 from configparser import ConfigParser
 from datetime import datetime
 
+
 def read_merge_with_dates(config, now_date):
     """
     :param config:

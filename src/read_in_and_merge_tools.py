@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def read_file(config):
     """
     :param config file that is used in the project
