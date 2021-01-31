@@ -20,10 +20,13 @@ def analysis(config, now):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    # monthly barchart
-    monthly_barchart = month_barchart(df)
-    plt.savefig(directory+"\monthly_barchart.png")
+    # monthly distance barchart
+    monthly_barchart_dist = month_barchart(df, "sum")
+    plt.savefig(directory+"\monthly_barchart_distance.png")
 
+    # monthly activity
+    monthly_barchart_act = month_barchart(df, "count")
+    plt.savefig(directory+"\monthly_barchart_activity.png")
 
 if __name__ == "__main__":
     config = ConfigParser()
