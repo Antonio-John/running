@@ -3,31 +3,40 @@ import pandas as pd
 
 
 
-def month_barchart(df, type):
-
+def barchart(df, type, time_period):
+    """
+    df is the dataframe and type is count or sum per month
+    """
     plt.figure()
-    df["month_year"] = df["month_year"].astype(str)
+    df[time_period] = df[time_period].astype(str)
     if type=="sum":
-        df_group_month = df.groupby(["month_year"]).sum()
+        df_group = df.groupby([time_period]).sum()
     elif type=="count":
-        df_group_month = df.groupby(["month_year"]).count()
+        df_group = df.groupby([time_period]).count()
+    elif type=="average":
+        df_group = df.groupby([time_period]).mean()
 
-    #print(df_group_month["distance"])
-    monthly_bar_time = plt.bar(df_group_month.index, df_group_month["distance"], align='center', alpha=0.5)
+
+    bar_time = plt.bar(df_group.index, df_group["distance"], align='center', alpha=0.5)
     plt.xticks(rotation='vertical')
     plt.rc('xtick', labelsize=10)
     plt.rc('ytick', labelsize=6)
-    plt.xlabel("Month")
+    plt.xlabel(time_period)
     plt.ylabel("Totals")
-    plt.title(type+' Per Month')
+    plt.title(type+' Per '+time_period)
     plt.tight_layout()
 
+    return bar_time
 
-    return monthly_bar_time
-
-
-
-
+def rolling_average(df, t):
+    """
+    
+    """
+    plt.figure()
+    df['distance'] = df['distance'].fillna(0)
+    df['rolling_average_'+str(t)+'_day'] = df.iloc[:, 4].rolling(window=t).sum()
+    rolling_avg_30 = plt.plot(df["date"], df['rolling_average_'+str(t)+'_day'])
+    plt.show()
 
 
 

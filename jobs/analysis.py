@@ -6,7 +6,7 @@
 from configparser import ConfigParser
 from datetime import datetime
 import pandas as pd
-from analysis_tools import month_barchart
+from analysis_tools import barchart, rolling_average
 import matplotlib.pyplot as plt
 import os
 
@@ -21,12 +21,35 @@ def analysis(config, now):
         os.makedirs(directory)
 
     # monthly distance barchart
-    monthly_barchart_dist = month_barchart(df, "sum")
+    monthly_barchart_dist = barchart(df, "sum", "month_year")
     plt.savefig(directory+"\monthly_barchart_distance.png")
 
     # monthly activity
-    monthly_barchart_act = month_barchart(df, "count")
+    monthly_barchart_act = barchart(df, "count", "month_year")
     plt.savefig(directory+"\monthly_barchart_activity.png")
+
+    monthly_barchart_avg = barchart(df, "average", "month_year")
+    plt.savefig(directory+"\monthly_barchart_average_activity.png")
+
+
+    # day of the week
+    dayofweek__barchart_dist = barchart(df, "sum", "dayofweek")
+    plt.savefig(directory+"\dayofweek_barchart_distance.png")
+
+    # monthly activity
+    dayofweek__barchart_act = barchart(df, "count", "dayofweek")
+    plt.savefig(directory+"\dayofweek__barchart_activity.png")
+
+    dayofweek__barchart_avg = barchart(df, "average", "dayofweek")
+    plt.savefig(directory+"\dayofweek__barchart_average_activity.png")
+
+
+    rolling_average_df_30=rolling_average(df, 30)
+    rolling_average_df_14 = rolling_average(df, 14)
+    rolling_average_df_10 = rolling_average(df, 10)
+    rolling_average_df_7 = rolling_average(df, 7)
+
+
 
 if __name__ == "__main__":
     config = ConfigParser()
