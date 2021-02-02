@@ -23,11 +23,9 @@ def analysis(config, now):
     # monthly distance barchart
     monthly_barchart_dist = barchart(df, "sum", "month_year")
     plt.savefig(directory+"\monthly_barchart_distance.png")
-
     # monthly activity
     monthly_barchart_act = barchart(df, "count", "month_year")
     plt.savefig(directory+"\monthly_barchart_activity.png")
-
     monthly_barchart_avg = barchart(df, "average", "month_year")
     plt.savefig(directory+"\monthly_barchart_average_activity.png")
 
@@ -35,11 +33,8 @@ def analysis(config, now):
     # day of the week
     dayofweek__barchart_dist = barchart(df, "sum", "dayofweek")
     plt.savefig(directory+"\dayofweek_barchart_distance.png")
-
-    # monthly activity
     dayofweek__barchart_act = barchart(df, "count", "dayofweek")
     plt.savefig(directory+"\dayofweek__barchart_activity.png")
-
     dayofweek__barchart_avg = barchart(df, "average", "dayofweek")
     plt.savefig(directory+"\dayofweek__barchart_average_activity.png")
 
