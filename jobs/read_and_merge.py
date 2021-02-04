@@ -24,4 +24,5 @@ if __name__ == "__main__":
     config = ConfigParser()
     config.read('C:\Running\config\config.properties')
     now = datetime.today().strftime("%m/%d/%Y")
+    print(now)
     read_merge_with_dates(config, now)

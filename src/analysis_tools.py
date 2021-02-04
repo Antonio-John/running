@@ -36,6 +36,10 @@ def rolling_average(df, t):
     df['distance'] = df['distance'].fillna(0)
     df['rolling_average_'+str(t)+'_day'] = df.iloc[:, 4].rolling(window=t).sum()
     rolling_avg_30 = plt.plot(df["date"], df['rolling_average_'+str(t)+'_day'])
+
+def histo(df, type):
+
+    plt.hist(df[type], bins=10, align="mid")
     plt.show()
 
 
