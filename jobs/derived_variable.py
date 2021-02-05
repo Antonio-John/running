@@ -1,4 +1,5 @@
-from derived_variables_tools import add_cumulatives_cols, add_month_variable, add_month_year, add_dayofweek, add_no_week
+from derived_variables_tools import (add_cumulatives_cols, add_month_variable, add_month_year,
+                                     add_dayofweek, add_no_week, add_km)
 from configparser import ConfigParser
 import pandas as pd
 
@@ -19,10 +20,11 @@ def derived_variables(config):
     month_year_df = add_month_year(time_df)
     dayofweek_df = add_dayofweek(month_year_df)
     no_week_df = add_no_week(dayofweek_df)
+    with_km_df = add_km(no_week_df)
 
     # save file out
     output_path=config.get("processed", "running_processed")
-    no_week_df.to_csv(output_path)
+    with_km_df.to_csv(output_path)
 
 
 if __name__ == "__main__":

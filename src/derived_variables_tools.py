@@ -59,3 +59,11 @@ def add_no_week(df):
         i = i + 1
 
     return df
+
+def add_km(df):
+
+    df["distance_km"] = df["distance"]/1000
+    df["cumulative_distance_km"] = df["cumulative_distance"] / 1000
+
+    return df
+

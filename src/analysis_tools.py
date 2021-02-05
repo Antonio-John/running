@@ -3,7 +3,7 @@ import pandas as pd
 
 
 
-def barchart(df, type, time_period):
+def barchart(df, type, time_period, category):
     """
     df is the dataframe and type is count or sum per month
     """
@@ -17,7 +17,7 @@ def barchart(df, type, time_period):
         df_group = df.groupby([time_period]).mean()
 
 
-    bar_time = plt.bar(df_group.index, df_group["distance"], align='center', alpha=0.5)
+    bar_time = plt.bar(df_group.index, df_group[category], align='center', alpha=0.5)
     plt.xticks(rotation='vertical')
     plt.rc('xtick', labelsize=10)
     plt.rc('ytick', labelsize=6)
@@ -38,11 +38,18 @@ def rolling_average(df, t):
     rolling_avg_30 = plt.plot(df["date"], df['rolling_average_'+str(t)+'_day'])
 
 def histo(df, type):
+    """
+    plot histogram
+    """
+    plt.figure()
+    plt.hist(df[type], bins=20, align="mid")
 
-    plt.hist(df[type], bins=10, align="mid")
-    plt.show()
 
 
+def line_plot(df, type):
 
+    plt.figure()
+    plt.plot(df.index, df[type])
+    plt.tight_layout()
 
 
