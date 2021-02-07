@@ -49,13 +49,13 @@ def add_dayofweek(df):
 
 def add_no_week(df):
 
-    df["Week"] = 0 * len(df)
-    Week = 1
+    df["week"] = 0 * len(df)
+    week = 1
     i = 2
     for i in range(2, len(df)):
         if df["dayofweek"][i] == 0:
-            Week = Week + 1
-        df["Week"][i] = Week
+            week = week + 1
+        df["week"][i] = week
         i = i + 1
 
     return df

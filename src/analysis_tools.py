@@ -7,8 +7,15 @@ def barchart(df, type, time_period, category):
     """
     df is the dataframe and type is count or sum per month
     """
+
+    if time_period=="week":
+        df["week"] = df["week"].astype(int)
+    else:
+        df[time_period] = df[time_period].astype(str)
+
+
     plt.figure()
-    df[time_period] = df[time_period].astype(str)
+
     if type=="sum":
         df_group = df.groupby([time_period]).sum()
     elif type=="count":
@@ -16,6 +23,8 @@ def barchart(df, type, time_period, category):
     elif type=="average":
         df_group = df.groupby([time_period]).mean()
 
+    if time_period == "week":
+        df_group=df_group.sort_index()
 
     bar_time = plt.bar(df_group.index, df_group[category], align='center', alpha=0.5)
     plt.xticks(rotation='vertical')
@@ -26,7 +35,7 @@ def barchart(df, type, time_period, category):
     plt.title(type+' Per '+time_period)
     plt.tight_layout()
 
-    return bar_time
+    return df_group
 
 def rolling_average(df, t):
     """

@@ -38,6 +38,11 @@ def analysis(config, now):
     dayofweek__barchart_avg = barchart(df, "average", "dayofweek", category="distance_km")
     plt.savefig(directory+"\dayofweek_barchart_average_activity.png")
 
+    # per week
+    week_over_time_barchart_dist = barchart(df, "sum", "week", category="distance_km")
+    plt.savefig(directory+"\weekly_barchart_distance.png")
+    print(week_over_time_barchart_dist)
+
 
     rolling_average_df_30=rolling_average(df, 30)
     rolling_average_df_14 = rolling_average(df, 14)
