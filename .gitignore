@@ -2,3 +2,4 @@ venv/
 bat/
 __pycache__
 data/analysis/
+*.docx
