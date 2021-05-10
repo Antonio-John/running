@@ -1,6 +1,6 @@
 import pandas as pd
 from src.read_and_merge_tools import get_dates_df
-from datetime import datetime
+
 
 def test_get_dates_df():
 

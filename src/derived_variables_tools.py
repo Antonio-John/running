@@ -10,7 +10,7 @@ def add_cumulatives_cols(df):
 
     df["cumulative_distance"] = np.nancumsum(df["distance"])
     df["cumulative_time"] = np.nancumsum(df["time"])
-    df["cumulative_hours"] = np.nancumsum(df["time" ] /60)
+    df["cumulative_hours"] = np.nancumsum(df["time"] /60)
     df["%_of_10000"] = df["%_of_10000"].ffill()
 
     return df
@@ -37,7 +37,8 @@ def add_month_year(df):
 
     df["year"] = pd.DatetimeIndex(df['date']).year
 
-    df["month_year"] = df["year"].astype(str)  + df["month"].astype(str)
+    df["year"] = df["year"].astype(str)
+    df["month_year"] = df["year"]  + df["month"].astype(str)
 
     return df
 
