@@ -2,7 +2,9 @@ import pandas as pd
 
 from src.derived_variables_tools import (add_cumulatives_cols,
                                          add_month_variable,
-                                         add_month_year)
+                                         add_month_year,
+                                         add_dayofweek,
+                                         add_no_week)
 
 def test_add_cumuluative_cols():
 
@@ -49,3 +51,18 @@ def test_add_month_year():
     result=add_month_year(input_df)
 
     pd.testing.assert_frame_equal(expected_df, result)
+
+def test_add_dayofweek():
+
+    input_df = pd.DataFrame({"date": [pd.to_datetime("05/10/2021"),
+                                      pd.to_datetime("05/11/2021")]})
+
+    expected_df = pd.DataFrame({"date": [pd.to_datetime("05/10/2021"),
+                                      pd.to_datetime("05/11/2021")],
+                                "dayofweek":[pd.to_datetime("05/11/2021").,
+                                             pd.to_datetime("05/11/2021")'2']})
+
+    result=add_dayofweek(input_df)
+
+    pd.testing.assert_frame_equal(expected_df,result)
+
