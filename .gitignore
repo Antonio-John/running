@@ -1,5 +1,5 @@
 venv/
-bat/
+Jobs/
 __pycache__
 data/analysis/
 *.docx
