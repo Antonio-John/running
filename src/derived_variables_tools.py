@@ -50,7 +50,7 @@ def add_dayofweek(df):
 
 def add_no_week(df):
 
-    df["week"] = 0 * len(df)
+    df["week"] = 1
     week = 1
     i = 2
     for i in range(2, len(df)):
