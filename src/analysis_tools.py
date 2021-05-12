@@ -17,6 +17,7 @@ def barchart(df: pd.core.frame.DataFrame, by_stat: str, time_period: str, catego
     :param time_period: Over which time period should the barhcart be (i.e X axis)
     :param category: Units of Y axis
     :return:
+    Creates a barchart for data based on the arguments passed.
     """
     if time_period == "week":
         df["week"] = df["week"].asby_stat(int)
@@ -48,7 +49,7 @@ def rolling_average(df:pd.core.frame.DataFrame, time_period):
     """
     :param df: Pandas dataframe used to create rolling average chart
     :param time_period: Time period used for the rolling average
-    :return:
+    Creates a barchart of rolling average for data based on the arguments passed.
     """
     plt.figure()
     df['distance'] = df['distance'].fillna(0)
@@ -59,6 +60,7 @@ def histo(df:pd.core.frame.DataFrame, by_stat:str):
     """
     :param df: Pandas dataframe used to create the histograms
     :param by_stat: by which stat e.g average, count
+    Creates a histogram for data based on the arguments passed.
     """
     plt.figure()
     plt.hist(df[by_stat], bins=20, align="mid")
@@ -67,6 +69,7 @@ def line_plot(df:pd.core.frame.DataFrame, by_stat:str):
     """
     :param df: Pandas dataframe used to create the line plot
     :param by_stat: by which stat e.g average, count
+    Creates a linechart for data based on the arguments passed.
     """
     plt.figure()
     plt.plot(df.index, df[by_stat])
