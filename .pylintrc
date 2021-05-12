@@ -1,2 +1,6 @@
+[MESSAGES CONTROL]
+disable=E1101
+
 [BASIC]
-good-names=df
+good-names=df,i, config
+

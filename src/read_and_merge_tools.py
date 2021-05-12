@@ -37,7 +37,6 @@ def get_dates_df(end_date:str)->pd.core.frame.DataFrame:
 
     return df_dates
 
-
 def merge(raw_df:pd.core.frame.DataFrame, df_date:str) -> pd.core.frame.DataFrame:
     """
     :param raw_df: Raw pandas dataframe to be merged

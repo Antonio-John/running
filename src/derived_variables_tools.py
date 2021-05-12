@@ -1,8 +1,18 @@
+"""
+This is the derived_variables tools module. This creates all derived variables needed for analysis
+*add_cumulatives_cols,
+*add_month_variable,
+*add_month_year,
+*add_dayofweek,
+*add_no_week,
+*add_km)
+"""
+import re
 import pandas as pd
 import numpy as np
-import re
 
-def add_cumulatives_cols(df):
+
+def add_cumulatives_cols(df:pd.core.frame.DataFrame)->pd.core.frame.DataFrame:
     """
     :param df: takes the merged df
     :return: adds in extra cumulative columns
@@ -15,10 +25,10 @@ def add_cumulatives_cols(df):
 
     return df
 
-def add_month_variable(df):
+def add_month_variable(df:pd.core.frame.DataFrame)->pd.core.frame.DataFrame:
     """
-    gets month variable added in
-
+    :param df:the merged pandas dataframe
+    :return: pandas dataframe with month variable added on
     """
     df["month"] = pd.DatetimeIndex(df['date']).month
 
@@ -33,23 +43,33 @@ def add_month_variable(df):
 
     return df
 
-def add_month_year(df):
+def add_month_year(df:pd.core.frame.DataFrame)->pd.core.frame.DataFrame:
+    """
+    :param df:the merged pandas dataframe
+    :return: pandas dataframe with month_year variable added on
+    """
 
     df["year"] = pd.DatetimeIndex(df['date']).year
 
     df["year"] = df["year"].astype(str)
-    df["month_year"] = df["year"]  + df["month"].astype(str)
+    df["month_year"] = df["year"] + df["month"].astype(str)
 
     return df
 
-def add_dayofweek(df):
-
+def add_dayofweek(df:pd.core.frame.DataFrame)->pd.core.frame.DataFrame:
+    """
+    :param df:the merged pandas dataframe
+    :return: pandas dataframe with dayofweek variable added on
+    """
     df["dayofweek"] = pd.DatetimeIndex(df['date']).dayofweek
 
     return df
 
-def add_no_week(df):
-
+def add_no_week(df:pd.core.frame.DataFrame)->pd.core.frame.DataFrame:
+    """
+    :param df:the merged pandas dataframe
+    :return: pandas dataframe with week number variable added on
+    """
     df["week"] = 1
     week = 1
     i = 2
@@ -61,10 +81,12 @@ def add_no_week(df):
 
     return df
 
-def add_km(df):
-
+def add_km(df:pd.core.frame.DataFrame)->pd.core.frame.DataFrame:
+    """
+    :param df:the merged pandas dataframe
+    :return: pandas dataframe with km variable added on
+    """
     df["distance_km"] = df["distance"]/1000
     df["cumulative_distance_km"] = df["cumulative_distance"] / 1000
 
     return df
-
