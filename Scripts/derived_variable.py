@@ -1,17 +1,23 @@
-from derived_variables_tools import (add_cumulatives_cols, add_month_variable, add_month_year,
-                                     add_dayofweek, add_no_week, add_km)
+"""
+This is the Script and main entry point to add in the extra derived variables
+that will be used in analysis.
+Functions
+*derived_variables
+"""
 from configparser import ConfigParser
 import pandas as pd
 
+from src.derived_variables_tools import (add_cumulatives_cols, add_month_variable, add_month_year,
+                                     add_dayofweek, add_no_week, add_km)
 
-def derived_variables(config):
+
+def derived_variables(conf):
     """
-    :param config:
-    :param now_date:
-    :return:
+    :param conf where all the file paths/settings are
+
     """
     # read file in
-    file_path=config.get("merged", "running_merged")
+    file_path=conf.get("merged", "running_merged")
     merged_df = pd.read_csv(file_path)
 
     # add in extra variables
@@ -29,5 +35,5 @@ def derived_variables(config):
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read('C:\Running\config\config.properties')
+    config.read(r'C:/Running/config/config.properties')
     derived_variables(config)
