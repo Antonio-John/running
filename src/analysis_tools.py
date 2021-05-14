@@ -5,6 +5,7 @@ Functions
 *rolling_average
 *histo
 *line_plot
+*goal_for_year
 """
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -20,9 +21,9 @@ def barchart(df: pd.core.frame.DataFrame, by_stat: str, time_period: str, catego
     Creates a barchart for data based on the arguments passed.
     """
     if time_period == "week":
-        df["week"] = df["week"].asby_stat(int)
+        df["week"] = df["week"].astype(int)
     else:
-        df[time_period] = df[time_period].asby_stat(str)
+        df[time_period] = df[time_period].astype(str)
 
     plt.figure()
 
@@ -55,6 +56,8 @@ def rolling_average(df:pd.core.frame.DataFrame, time_period):
     df['distance'] = df['distance'].fillna(0)
     df['rolling_average_'+str(time_period)+'_day'] = df.iloc[:, 4].rolling(window=time_period).sum()
     plt.plot(df["date"], df['rolling_average_'+str(time_period)+'_day'])
+    plt.title("Rolling " + str(time_period) + " Average")
+    plt.tight_layout()
 
 def histo(df:pd.core.frame.DataFrame, by_stat:str):
     """
@@ -63,7 +66,7 @@ def histo(df:pd.core.frame.DataFrame, by_stat:str):
     Creates a histogram for data based on the arguments passed.
     """
     plt.figure()
-    plt.hist(df[by_stat], bins=20, align="mid")
+    plt.hist(df[by_stat], bins=10, align="mid")
 
 def line_plot(df:pd.core.frame.DataFrame, by_stat:str):
     """
@@ -74,3 +77,26 @@ def line_plot(df:pd.core.frame.DataFrame, by_stat:str):
     plt.figure()
     plt.plot(df.index, df[by_stat])
     plt.tight_layout()
+
+def goal_for_year(df:pd.core.frame.DataFrame, year)->pd.core.frame.DataFrame:
+    """
+    :param df: processed dataframe
+    :param year: year i want to do the goal for
+    Want to run 2021 km in 2021, this is the progress  track
+    """
+
+    days = range(0, 365)
+    year_df=df[df["year"]==year]
+    km_so_far=year_df["distance_km"].sum()
+    row_count=len(year_df)
+    current_avg_per_day=[km_so_far/row_count]
+
+    time_series_per_day_current = [avg * day for day in days for avg in current_avg_per_day]
+
+    goal_avg_per_day=[year/365]
+    time_series_per_day_goal=[avg * day for day in days for avg in goal_avg_per_day]
+
+    plt.figure()
+    plt.plot(range(0,365), time_series_per_day_goal)
+    plt.plot(range(0, 365), time_series_per_day_current)
+    plt.show()

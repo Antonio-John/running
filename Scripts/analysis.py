@@ -9,14 +9,14 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from src.analysis_tools import barchart, rolling_average, histo, line_plot
+from src.analysis_tools import barchart, rolling_average, histo, line_plot, goal_for_year
 
 
 def analysis(conf, today):
     """
     :param config:
     :param now:
-    Saves all the analysis and barcharts needed
+    Saves all the analysis and visualisations needed
     """
 
     # reads in file
@@ -49,15 +49,23 @@ def analysis(conf, today):
     barchart(df, "sum", "week", category="distance_km")
     plt.savefig(directory+r"/weekly_barchart_distance.png")
 
-    rolling_average(df, 30)
-    rolling_average(df, 14)
-    rolling_average(df, 10)
-    rolling_average(df, 7)
+    # rolling average
+    time_period=[30,14,10,7]
+    for time in time_period:
+        rolling_average(df, time)
+        plt.savefig(directory + r"/rolling_average_"+str(time)+".png")
 
+
+    # histogram
     histo(df, "distance")
+    plt.savefig(directory + r"/Histogram_Distance.png")
+
 
     line_plot(df, "cumulative_distance_km")
-    plt.savefig(directory + "r/km_overtime.png")
+    plt.savefig(directory + r"/km_overtime.png")
+
+    goal_for_year(df, 2021)
+
 
 
 if __name__ == "__main__":
