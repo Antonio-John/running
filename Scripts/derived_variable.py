@@ -6,8 +6,10 @@ Functions
 """
 from configparser import ConfigParser
 import pandas as pd
+import sys
+sys.path.append("../src")
 
-from src.derived_variables_tools import (add_cumulatives_cols, add_month_variable, add_month_year,
+from derived_variables_tools import (add_cumulatives_cols, add_month_variable, add_month_year,
                                          add_dayofweek, add_no_week, add_km)
 
 
@@ -35,5 +37,5 @@ def derived_variables(conf):
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read(r'C:/Running/config/config.properties')
+    config.read('../config/config.properties')
     derived_variables(config)

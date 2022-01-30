@@ -43,6 +43,8 @@ def merge(raw_df:pd.core.frame.DataFrame, df_date:str) -> pd.core.frame.DataFram
     :param df_date: Dates df which is to be merged into
     :return:
     """
+    #raw_df.date.astype('datetime64[ns]')
+    #df_date.date.astype('datetime64[ns]')
     merged = df_date.merge(raw_df, how="left", on="date")
 
     return merged

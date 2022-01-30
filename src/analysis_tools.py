@@ -36,6 +36,9 @@ def barchart(df: pd.core.frame.DataFrame, by_stat: str, time_period: str, catego
 
     if time_period == "week":
         df_group = df_group.sort_index()
+        # TODO: tech debt
+        sorted=df_group.sort_values("distance_km")
+        sorted.to_csv("per_week.csv")
 
     plt.bar(df_group.index, df_group[category], align='center', alpha=0.5)
     plt.xticks(rotation='vertical')
@@ -99,4 +102,4 @@ def goal_for_year(df:pd.core.frame.DataFrame, year)->pd.core.frame.DataFrame:
     plt.figure()
     plt.plot(range(0,365), time_series_per_day_goal)
     plt.plot(range(0, 365), time_series_per_day_current)
-    plt.show()
+

@@ -8,8 +8,10 @@ from datetime import datetime
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import sys
+sys.path.append("../src")
 
-from src.analysis_tools import barchart, rolling_average, histo, line_plot, goal_for_year
+from analysis_tools import barchart, rolling_average, histo, line_plot, goal_for_year
 
 
 def analysis(conf, today):
@@ -35,6 +37,10 @@ def analysis(conf, today):
     plt.savefig(directory+r"/monthly_barchart_activity.png")
     barchart(df, "average", "month_year", category="distance_km")
     plt.savefig(directory+r"/monthly_barchart_average_activity.png")
+    
+    # time per month
+    barchart(df, "sum", "month_year", category="time")
+    plt.savefig(directory+r"/monthly_barchart_time.png")
 
 
     # day of the week
@@ -48,6 +54,8 @@ def analysis(conf, today):
     # per week
     barchart(df, "sum", "week", category="distance_km")
     plt.savefig(directory+r"/weekly_barchart_distance.png")
+    
+
 
     # rolling average
     time_period=[30,14,10,7]
@@ -65,11 +73,12 @@ def analysis(conf, today):
     plt.savefig(directory + r"/km_overtime.png")
 
     goal_for_year(df, 2021)
+    plt.savefig(directory+r"/goals_2021.png")
 
 
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read(r'C:/Running/config/config.properties')
+    config.read('../config/config.properties')
     now = datetime.today().strftime("%Y%m%d")
     analysis(config, now)

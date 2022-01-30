@@ -7,8 +7,10 @@ Functions
 from configparser import ConfigParser
 from datetime import datetime
 import pandas as pd
+import sys
+sys.path.append("../src")
 
-from src.read_and_merge_tools import read_file, get_dates_df, merge
+from read_and_merge_tools import read_file, get_dates_df, merge
 
 
 def read_merge_with_dates(conf:dict, now_date:str)->pd.core.frame.DataFrame:
@@ -29,6 +31,6 @@ def read_merge_with_dates(conf:dict, now_date:str)->pd.core.frame.DataFrame:
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read(r'C:/Running/config/config.properties')
+    config.read('../config/config.properties')
     now = datetime.today().strftime("%m/%d/%Y")
     read_merge_with_dates(config, now)
