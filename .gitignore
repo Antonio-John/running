@@ -1,4 +1,5 @@
 venv/
 Jobs/
+data/analysis/
 __pycache__
 *.docx
