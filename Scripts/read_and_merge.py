@@ -8,7 +8,10 @@ from configparser import ConfigParser
 from datetime import datetime
 import pandas as pd
 import sys
-sys.path.append("../src")
+import os
+
+src_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.append(src_path)
 
 from read_and_merge_tools import read_file, get_dates_df, merge
 
@@ -31,6 +34,10 @@ def read_merge_with_dates(conf:dict, now_date:str)->pd.core.frame.DataFrame:
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read('../config/config.properties')
+    con_path=os.path.realpath(os.path.join(os.path.dirname(__file__), 
+                                           '..', 
+                                           'config',
+                                           'config.properties'))
+    config.read(con_path)
     now = datetime.today().strftime("%m/%d/%Y")
     read_merge_with_dates(config, now)

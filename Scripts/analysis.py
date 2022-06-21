@@ -9,7 +9,8 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
-sys.path.append("../src")
+src_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.append(src_path)
 
 from analysis_tools import barchart, rolling_average, histo, line_plot, goal_for_year
 
@@ -79,6 +80,10 @@ def analysis(conf, today):
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read('../config/config.properties')
+    con_path=os.path.realpath(os.path.join(os.path.dirname(__file__), 
+                                           '..', 
+                                           'config',
+                                           'config.properties'))
+    config.read(con_path)
     now = datetime.today().strftime("%Y%m%d")
     analysis(config, now)

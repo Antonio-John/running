@@ -7,7 +7,9 @@ Functions
 from configparser import ConfigParser
 import pandas as pd
 import sys
-sys.path.append("../src")
+import os
+src_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.append(src_path)
 
 from derived_variables_tools import (add_cumulatives_cols, add_month_variable, add_month_year,
                                          add_dayofweek, add_no_week, add_km)
@@ -37,5 +39,9 @@ def derived_variables(conf):
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read('../config/config.properties')
+    con_path=os.path.realpath(os.path.join(os.path.dirname(__file__), 
+                                           '..', 
+                                           'config',
+                                           'config.properties'))
+    config.read(con_path)
     derived_variables(config)
